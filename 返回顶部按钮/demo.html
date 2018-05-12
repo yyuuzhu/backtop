@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.btn {
+			width: 40px;
+			height: 80px;
+			position: fixed;
+			bottom: 30px;
+			background-color: red;
+			left: 50%;
+			margin-left: 500px;
+			cursor: pointer;
+			display: none;
+		}
+		.btn:hover {
+			background-color: green;
+		}
+	</style>
+	<script>
+	window.onload = function(){
+		var topbtn = document.getElementById('btn');
+		var timer = null;
+		//获取屏幕高度(可见区域高度)
+		var pagelookheight = document.documentElement.clientHeight;
+
+		window.onscroll = function(){
+			var backtop = document.body.scrollTop;
+			if(backtop >= pagelookheight){
+				topbtn.style.display = "block";
+			}else{
+				topbtn.style.display = "none";
+			}
+		}
+
+		topbtn.onclick = function(){	
+			timer = setInterval(function(){
+				//设置速度，让返回顶部时有缓慢效果
+				var backtop = document.body.scrollTop;
+				var speedtop = backtop/5;
+				document.body.scrollTop = backtop - speedtop;
+				if(backtop == 0){
+					clearInterval(timer);
+				}
+			},30);
+		}
+	}
+	</script>
+</head>
+<body>
+	<div class="box">
+		<img src="1.jpg" alt="" />
+	</div>
+	<a href="javascript:;" class="btn" id="btn" title="回到顶端"></a>
+</body>
+</html>
